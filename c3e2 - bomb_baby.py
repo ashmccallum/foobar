@@ -1,23 +1,35 @@
-def answer(M, F):
-    mBombs = 1
-    fBombs = 1
-    gens = 0
+# Generate Tree:
+# 1) create node class with value, parent, left and right properties
+class Node:
+    def __init__(self, val):
+        self.v = val
+        self.r = None
+        self.l = None
 
-    if M > 1000 or F > 1000:
-        return "impossible"
+# 2) create tree class
+class Tree:
+    def __init__(self):
+        self.root = None
 
-    # take the largest from M & F, 1st generation to aim towards that
-    while mBombs < M or fBombs < F:
-        if (int(M) - mBombs) >= (int(F) - fBombs):
-            mBombs = mBombs + fBombs
-            gens += 1
+
+    # create add method for starting root
+    def add(self, val):
+        if (self.root == None):
+            self.root = Node(val)
         else:
-            fBombs = fBombs + mBombs
-            gens += 1
+            self._add(val, self.root)
 
-        print "M: " + str(mBombs) + ", F: " + str(fBombs)
+    # use _add for recursively filling tree
+    # Q: Should I always create a left and right node to be a proper tree? It will mean having negative numbers
+    def _add(self, val, node):
+        if (val.m < 1 or val.f < 1):
 
-    return str(gens)
+        elif (val.m < val.f):
+
+def answer(M, F):
+    t = Tree()
+    t.add({"m":M, "f":F})
+    return
 
 print answer(2,1)
 print answer(4,7)
