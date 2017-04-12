@@ -1,35 +1,39 @@
-# Generate Tree:
-# 1) create node class with value, parent, left and right properties
-class Node:
-    def __init__(self, val):
-        self.v = val
-        self.r = None
-        self.l = None
-
-# 2) create tree class
-class Tree:
-    def __init__(self):
-        self.root = None
-
-
-    # create add method for starting root
-    def add(self, val):
-        if (self.root == None):
-            self.root = Node(val)
-        else:
-            self._add(val, self.root)
-
-    # use _add for recursively filling tree
-    # Q: Should I always create a left and right node to be a proper tree? It will mean having negative numbers
-    def _add(self, val, node):
-        if (val.m < 1 or val.f < 1):
-
-        elif (val.m < val.f):
-
 def answer(M, F):
-    t = Tree()
-    t.add({"m":M, "f":F})
-    return
+    m = int(M)
+    f = int(F)
 
-print answer(2,1)
-print answer(4,7)
+    gen = 0
+
+    if (m != 1 or f != 1) and (m % f == 0) or (f % m == 0) or (m % 2 == 0 and f % 2 == 0) and (m < 1 and f < 1):
+        return "impossible"
+    elif m >= 10 ** 50 and f >= 10 * 50:
+        return "impossible"
+
+    while m != f:
+        if m < 1 and f < 1:
+            break
+        elif m > f:
+            m -= f
+            gen += 1
+        else:
+            f -= m
+            gen += 1
+
+    if m == 1 or f == 1:
+        return gen
+    # elif m == 1:
+    #     gen += f - 1
+    #     return gen
+    # elif f == 1:
+    #     gen += m - 1
+    #     return gen
+    else:
+        return "impossible"
+
+
+# print answer(2,1)
+# print answer(2,4)
+# print answer(4,7)
+# print answer(16,43)
+print answer(-3,1)
+print answer(10**10,47)
